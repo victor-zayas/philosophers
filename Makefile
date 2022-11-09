@@ -11,12 +11,11 @@
 # **************************************************************************** #
 
 # NAME #
-NAME = so_long
+NAME = philosophers
 
 # COMPILATION #
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 #$-fsanitize=address
-MLX = -framework OpenGL -framework AppKit
 RM = /bin/rm -rf
 
 # OBJS #
