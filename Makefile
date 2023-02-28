@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2022/09/29 19:31:24 by vzayas-s         ###   ########.fr        #
+#    Updated: 2022/11/15 19:14:26 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = philosophers
 
 # COMPILATION #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 #$-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -pthread -g3 #$-fsanitize=address
 RM = /bin/rm -rf
 
 # OBJS #
@@ -44,7 +44,6 @@ $(MAG)
   / /_/ / /_/ // // /   / / / /\__ \/ / / / /_/ / /_/ / __/ / /_/ /\__ \ 
  / ____/ __  // // /___/ /_/ /___/ / /_/ / ____/ __  / /___/ _, _/___/ / 
 /_/   /_/ /_/___/_____/\____//____/\____/_/   /_/ /_/_____/_/ |_|/____/  
-                                                                         
 $(END)
 endef
 export PHILO
@@ -56,6 +55,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	open The_file/philosophers.jpeg
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$PHILO"
 
