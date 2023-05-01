@@ -6,23 +6,37 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2022/11/15 19:14:26 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/05/01 20:46:44 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# RULES #
 
 # NAME #
 NAME = philosophers
 
-# COMPILATION #
+# FLAGS #
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread -g3 #$-fsanitize=address
 RM = /bin/rm -rf
 
+# INCLUDES #
+LIBFTDIR = Libft_extended/
+
+INCDIR = includes/philosophers.h
+INCLUDES = -I $(INCDIR)
+
 # OBJS #
 OBJS = $(SRCS:.c=.o)
 
+OBJDIR := objs/
+SRCDIR := src/
+
 # SRC #
 SRCS = philo.c	\
+
+SRC := $(addprefix $(SRCDIR), $(SRCS))
+OBJS := $(addprefix $(OBJDIR), $(OBJS))
 
 # MAKEFILE ART #
 # COLORS #
@@ -48,25 +62,42 @@ $(END)
 endef
 export PHILO
 
-# RULES #
+# COMPILATION #
 .SILENT:
 
 all: $(NAME)
 
+$(OBJDIR)%.o: $(SRCDIR)%.c
+	mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $^ -o $@
+
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	make -C $(LIBFTDIR) all
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFTDIR)/libft.a -o $^ $(NAME)
 	open The_file/philosophers.jpeg
 	echo "$(BLUE)༺ library created༻$(END)"
 	echo "$$PHILO"
+	close philosophers.jpeg
 
-clean: 
+clean:
+	make -C $(LIBFTDIR) clean
+	rm -rf $(OBJDIR)
 	$(RM) $(OBJS)
 	echo "$(RED)༺ Objs deleted༻$(END)"
 
 fclean: clean
+	make -C $(LIBFTDIR) fclean
 	$(RM) $(NAME)
 		echo "$(YELLOW)༺ Executable deleted༻$(END)"
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+####### TOTALMENTE INNECESARIO #######
+#ifeq ($(USER), $(filter $(USER), "intra_user"))
+#		echo $$"TEXT" (Variable de entorno a exportar)
+#		osascript -e "set Volume 10" (ajustar el volumen del ordenador)
+#		say --voice="Luciana" rellenar con mensaje. (reproduce el mensaje en el idioma seleccionado)
+#endif
+####### 	  NO BORRAR		   #######
