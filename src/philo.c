@@ -6,60 +6,66 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:15:44 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/23 11:59:22 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:13:54 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*create_philo(int __unused nb_ph)
+void	*ft_routine(void *arg)
 {
-	int	i = 0;
-
-	while (++i <= 100)
-		//printf("Philosopher [%d]\n", i);
-		write(1, "hola\n", 5);
+	(void)arg;
+	printf("a\n");
 	return (0);
 }
 
-void	*create_fork(int __unused nb_fk)
+void	*ft_routine2(void *arg)
 {
-	int	i = 0;
-	
-	//printf("%d", nb_fk);
-	while (++i <= 100)
-		write(1, "hola2\n", 6);
-		//printf("Tenedor [%d]\n", i);
+	(void)arg;
+	printf("b\n");
 	return (0);
+}
+
+void	ft_create_threat(t_info *data)
+{
+	pthread_t	p1;
+	pthread_t	p2;
+	int			i = 0;
+
+	(void)data;
+	while (++i < data->nb)
+	{
+		pthread_create(&p1, NULL, &ft_routine, (void *)&data->nb);
+		pthread_join(p1, NULL);
+		//printf("\nFin philosophers\n\n");
+		pthread_create(&p2, NULL, &ft_routine2, (void *)&data->nb);
+		pthread_join(p2, NULL);
+		//printf("\nFin Tresnedores\n\n");
+	}
 }
 
 int	main(int argc, char **argv)
 {
-	pthread_t	p1;
-	//pthread_t	p2;
-	int			i;
-	int			nb_ph;
-	int			nb_fk;
+	t_info	info;
+	int		i;
 
-	(void)argv;
 	i = 0;
-	nb_ph = ft_atoi(argv[1]);
-	nb_fk = ft_atoi(argv[1]);
-	if (argc == 4)
-	{	
-		pthread_create(&p1, NULL, create_philo(nb_ph), NULL);
-		//pthread_join(p1, NULL);
-		printf("acaba el hilo\n");
-		//pthread_create(&p2, NULL, create_fork(nb_fk), NULL);
-		//pthread_join(p2, NULL);
-	}
-	else if (argc == 5)
+	if (argc == 5)
 	{
+		ft_get_args(argv, &info);
+		ft_create_threat(&info);
+	}
+	else if (argc == 6)
+	{
+		//en caso de que haya el parametro opcional de veces comidas;
 		printf("No esta hecho, te esperas crack <( •̀ᴖ•́)>\n");
 	}
 	else
-		printf("Unexpected error in your brain (; ￢＿￢)\n");
-	//exit(0);
+	{
+		//caso de error argumentos invalidos;
+		printf("Unexpected error (; ￢＿￢)\n");
+	}
+	exit(0);
 }
 
-// number_of_philosophers | time_to_die | time_to_eat time_to_sleep
+// number_of_philosophers | time_to_die | time_to_eat | time_to_sleep
