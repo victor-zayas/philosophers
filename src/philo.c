@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:15:44 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/24 15:13:54 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:55:56 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,22 @@ void	*ft_routine2(void *arg)
 void	ft_create_threat(t_info *data)
 {
 	pthread_t	p1;
-	pthread_t	p2;
+	//pthread_t	p2;
 	int			i = 0;
 
 	(void)data;
-	while (++i < data->nb)
+	while (++i <= data->nb)
 	{
 		pthread_create(&p1, NULL, &ft_routine, (void *)&data->nb);
 		pthread_join(p1, NULL);
 		//printf("\nFin philosophers\n\n");
-		pthread_create(&p2, NULL, &ft_routine2, (void *)&data->nb);
-		pthread_join(p2, NULL);
+		//pthread_create(&p2, NULL, &ft_routine2, (void *)&data->nb);
+		//pthread_join(p2, NULL);
 		//printf("\nFin Tresnedores\n\n");
 	}
 }
 
+// number_of_philosophers | time_to_die | time_to_eat | time_to_sleep
 int	main(int argc, char **argv)
 {
 	t_info	info;
@@ -67,5 +68,3 @@ int	main(int argc, char **argv)
 	}
 	exit(0);
 }
-
-// number_of_philosophers | time_to_die | time_to_eat | time_to_sleep

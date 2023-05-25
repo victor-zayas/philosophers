@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:27:09 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/24 15:11:50 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:50:45 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,20 @@
 
 typedef struct s_info
 {
-	int	nb;
-	int	ttd;
-	int	tte;
-	int	tts;
+	int			nb;
+	int			ttd;
+	int			tte;
+	int			tts;
+	pthread_t	thr;
 }	t_info;
+
+typedef struct philo
+{
+	int		nb;
+	int		lf;
+	t_info	*info;
+}	t_philo;
+
 
 // PROT
 

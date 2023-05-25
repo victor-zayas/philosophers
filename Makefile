@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2023/05/24 15:01:53 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/05/25 12:55:22 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $(NAME)
 #	open The_file/philosophers.jpeg
-	echo "$(BLUE)༺ library created༻$(END)"
+	echo "$(BLUE)༺ Program compiled༻$(END)"
 #	echo "$$PHILO"
 
 clean:
