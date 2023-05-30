@@ -5,42 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 12:17:29 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/23 12:21:05 by vzayas-s         ###   ########.fr       */
+/*   Created: 2023/05/30 12:22:09 by vzayas-s          #+#    #+#             */
+/*   Updated: 2023/05/30 13:44:04 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_atoi(const char *str)
+int	ft_time(void)
 {
-	int	result;
-	int	i;
-	int	sign;
+	struct timeval	time;
 
-	i = 0;
-	sign = 1;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	result = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			break ;
-		result = result * 10 + (str[i++] - 48);
-	}
-	return (result * sign);
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-int	ft_isdigit(int c)
+int	ft_timediff(struct timeval time)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	struct timeval	diff;
+
+	gettimeofday(&diff, NULL);
+	return (((diff.tv_sec * 1000) + (diff.tv_usec / 1000))
+		- ((time.tv_sec * 1000) + (time.tv_usec / 1000)));
+}
+
+void	ft_status(t_philo *philo, char *str)
+{
+	pthread_mutex_lock(&philo->info->status);
+	printf("%d Philo %d %s\n", ft_time() - philo->info->time, philo->nb, str);
+	pthread_mutex_unlock(&philo->info->status);
 }

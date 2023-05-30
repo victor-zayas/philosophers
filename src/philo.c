@@ -6,65 +6,48 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:15:44 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/25 12:55:56 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:27:29 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*ft_routine(void *arg)
+void	*ft_routine(void *args)
 {
-	(void)arg;
+	t_philo	*philo;
+
+	philo = args;
 	printf("a\n");
 	return (0);
 }
 
-void	*ft_routine2(void *arg)
+void	ft_create_thread(t_info *data)
 {
-	(void)arg;
-	printf("b\n");
-	return (0);
-}
-
-void	ft_create_threat(t_info *data)
-{
-	pthread_t	p1;
-	//pthread_t	p2;
-	int			i = 0;
-
-	(void)data;
-	while (++i <= data->nb)
-	{
-		pthread_create(&p1, NULL, &ft_routine, (void *)&data->nb);
-		pthread_join(p1, NULL);
-		//printf("\nFin philosophers\n\n");
-		//pthread_create(&p2, NULL, &ft_routine2, (void *)&data->nb);
-		//pthread_join(p2, NULL);
-		//printf("\nFin Tresnedores\n\n");
-	}
-}
-
-// number_of_philosophers | time_to_die | time_to_eat | time_to_sleep
-int	main(int argc, char **argv)
-{
-	t_info	info;
+	t_philo	*philo;
 	int		i;
 
 	i = 0;
-	if (argc == 5)
+	philo = malloc(sizeof(t_philo) * data->nb);
+	if (!philo)
+		return ;
+	data->time = ft_time();
+	while (++i <= data->nb)
 	{
-		ft_get_args(argv, &info);
-		ft_create_threat(&info);
+		philo[i].nb = i;
+		philo[i].lf = i;
+		philo[i].rf = (i + 1) % data->nb;
+		philo[i].info = data;
+		pthread_create(&data->th[i], NULL, &ft_routine, &philo[i]);
 	}
-	else if (argc == 6)
-	{
-		//en caso de que haya el parametro opcional de veces comidas;
-		printf("No esta hecho, te esperas crack <( •̀ᴖ•́)>\n");
-	}
-	else
-	{
-		//caso de error argumentos invalidos;
-		printf("Unexpected error (; ￢＿￢)\n");
-	}
-	exit(0);
+	while (++i <= data->nb)
+		pthread_join(data->th[i], NULL);
+}
+
+// number_of_philosophers | time_to_die | time_to_eat | time_to_sleep || must eat
+int	main(int argc, char **argv)
+{
+	t_info	info;
+
+	ft_check(argc, argv, &info);
+	ft_create_threat(&info);
 }
