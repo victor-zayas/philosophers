@@ -6,25 +6,37 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:23:04 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/30 16:26:23 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:56:20 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	print_args(t_info *info)
+static int	ft_init(t_info *info)
 {
-	printf("[%d]\n", info->nb);
-	printf("[%d]\n", info->ttd);
-	printf("[%d]\n", info->tte);
-	printf("[%d]\n", info->tts);
-}
-
-/* static int	ft_init(t_info *info)
-{
+	int	i;
 	//reservar memoria para hilo
+	info->th = malloc(sizeof(pthread_t) * info->nb);
+	if (!info->th)
+		return (1);
 	//reservar memoria para fork
-} */
+	info->fork = malloc(sizeof(pthread_t) * info->nb);
+	if (!info->fork)
+	{
+		//se liberan los hilos en caso de error
+		free(info->th);
+		return (1);
+	}
+	//se inician los mutex
+	i = 0;
+	while (++i < info->nb)
+		pthread_mutex_init(&info->fork[i], NULL);
+	pthread_mutex_init(&info->dead, NULL);
+	pthread_mutex_init(&info->status, NULL);
+	info->died = 0;
+	info->eaten = 0;
+	return (0);
+}
 
 static int	ft_get_args(char **argv, t_info *info)
 {
@@ -40,9 +52,16 @@ static int	ft_get_args(char **argv, t_info *info)
 	info->tts = ft_atoi(argv[4]);
 	if (info->tts <= 0)
 		return (1);
-	//if (ft_init(info))
-	//	return (1);
-	print_args(info);
+	if (!argv[5])
+		info->must_eat = 0;
+	else
+	{
+		info->must_eat = atoi(argv[5]);
+		if (info->must_eat <= 0)
+			return (1);
+	}
+	if (ft_init(info))
+		return (1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2023/05/30 16:26:39 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/05/31 12:54:05 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = philosophers
 
 # FLAGS #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -pthread -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread -g3 #-fsanitize=thread
 RM = /bin/rm -rf
 
 # INCLUDES #
@@ -32,8 +32,9 @@ SRCDIR := src/
 
 # SRC #
 SRCS =	philo.c	\
-		utils.c \
 		initialize.c \
+		actions.c \
+		utils.c \
 		lib.c \
 
 SRC := $(addprefix $(SRCDIR), $(SRCS))
