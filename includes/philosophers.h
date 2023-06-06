@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:27:09 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/31 12:51:23 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:04:04 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef struct s_info
 	int				tte;
 	int				tts;
 	int				time;
-	int				died;
 	int				must_eat;
 	int				eaten;
+	int				died;
 	pthread_t		*th;
 	pthread_mutex_t	status;
 	pthread_mutex_t	*fork;
@@ -50,21 +50,13 @@ typedef struct philo
 
 
 // PROT
-	//ACTIONS
-void	ft_isdead(t_philo *philo);
-void	ft_sleep(t_philo *philo);
+	//INIT_ARGS
+int	ft_check(int argc, char **argv, t_info *info);
 
-	// LIB
-int		ft_atoi(const char *str);
-int		ft_isdigit(int c);
+	//PRINT
+int	ft_print_status(t_philo *philo, char *s);
 
-	// INIT
-int		ft_check(int argc, char **argv, t_info *info);
-
-	//UTILS
-int		ft_time(void);
-void	ft_usleep(int mls, t_philo *philo);
-void	ft_status(t_philo *philo, char *str);
-void	print_args(t_philo *philo);
+	//TIME
+int	ft_time(void);
 
 #endif

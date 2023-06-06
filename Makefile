@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2023/05/31 12:54:05 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/06/06 13:03:37 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,12 @@ OBJDIR := objs/
 SRCDIR := src/
 
 # SRC #
-SRCS =	philo.c	\
-		initialize.c \
-		actions.c \
-		utils.c \
-		lib.c \
-
+SRCS =	main.c	\
+		lib.c	\
+		print.c	\
+		time.c	\
+		init_args.c	\
+		
 SRC := $(addprefix $(SRCDIR), $(SRCS))
 OBJS := $(addprefix $(OBJDIR), $(OBJS))
 
