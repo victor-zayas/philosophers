@@ -6,11 +6,18 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:17:29 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/30 12:22:01 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:27:42 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+static int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -36,11 +43,4 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (str[i++] - 48);
 	}
 	return (result * sign);
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
 }

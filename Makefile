@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2023/06/06 13:03:37 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/06/07 22:39:58 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS =	main.c	\
 		print.c	\
 		time.c	\
 		init_args.c	\
+		actions.c	\
 		
 SRC := $(addprefix $(SRCDIR), $(SRCS))
 OBJS := $(addprefix $(OBJDIR), $(OBJS))

@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:27:09 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/06 13:04:04 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:32:09 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_info
 	int				ttd;
 	int				tte;
 	int				tts;
-	int				time;
+	long			time;
 	int				must_eat;
 	int				eaten;
 	int				died;
@@ -50,6 +50,9 @@ typedef struct philo
 
 
 // PROT
+	//LIB
+int	ft_atoi(const char *str);
+
 	//INIT_ARGS
 int	ft_check(int argc, char **argv, t_info *info);
 
@@ -58,5 +61,11 @@ int	ft_print_status(t_philo *philo, char *s);
 
 	//TIME
 int	ft_time(void);
+int	ft_timediff(struct timeval time);
+int	ft_sleep(int ms);
+
+	//ACTIONS
+int	ft_isdead(t_philo *philo);
+int	ft_iseating(t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:42:32 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/06 11:54:00 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/07 21:28:04 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	ft_print_status(t_philo *philo, char *s)
 	}
 	else
 	{
-		printf("%d Philo %d %s\n", ft_time() - philo->info->time, philo->nb, s);
+		printf("%ld Philo %d %s\n", ft_time() - philo->info->time, philo->nb, s);
 	}
 	pthread_mutex_unlock(&philo->info->status);
+	return (0);
 }

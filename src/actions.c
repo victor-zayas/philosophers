@@ -5,36 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 12:00:59 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/05/31 12:47:25 by vzayas-s         ###   ########.fr       */
+/*   Created: 2023/06/07 21:28:24 by vzayas-s          #+#    #+#             */
+/*   Updated: 2023/06/07 22:29:43 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_isdead(t_philo *philo)
+int	ft_isdead(t_philo *philo)
 {
-	if (philo->info->died)
-		return ;
-	pthread_mutex_lock(&philo->info->dead);
-	if ((ft_time() - philo->info->time) >= philo->info->ttd)
-	{
-		ft_status(philo, "died");
+	if (philo->info->tte > philo->info->ttd && philo->info->tts > philo->info->ttd)
 		philo->info->died = 1;
-		pthread_mutex_unlock(&philo->info->dead);
-		return ;
-	}
-	pthread_mutex_unlock(&philo->info->dead);
+	return (0);
 }
 
-void	ft_sleep(t_philo *philo)
+int	ft_iseating(t_philo *philo)
 {
-	ft_isdead(philo);
-	if (philo->info->died)
-		return ;
-	ft_status(philo, "is sleeping");
-	ft_usleep(philo->info->tts, philo);
-	ft_isdead(philo);
-	if (philo->info->died)
-		return ;
+	int i = -1;
+
+	if (ft_isdead(philo))
+		return (1);
+	while (++i < philo->nb)
+	{
+		if (philo->lf && philo->rf)
+			ft_print_status(philo, "is eating...");
+		ft_sleep(philo->info->tte);
+	}
+	return (0);
 }

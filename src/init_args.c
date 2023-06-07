@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:02:40 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/06 12:39:59 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:41:46 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static	int	ft_init(t_info *info)
 		return (1);
 	}
 	i = -1;
-	while (++i <= info->nb)
+	while (++i < info->nb)
 		pthread_mutex_init(&info->fork[i], NULL);
 	pthread_mutex_init(&info->dead, NULL);
 	pthread_mutex_init(&info->status, NULL);
