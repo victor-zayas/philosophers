@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:02:40 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/07 22:41:46 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:33:32 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,11 @@ static	int	ft_init(t_info *info)
 {
 	int	i;
 
-	info->th = malloc(sizeof(pthread_t) * info->nb);
 	if (!info->nb)
 		return (1);
-	info->fork = malloc(sizeof(pthread_t) * info->nb);
+	info->fork = malloc(sizeof(pthread_mutex_t) * info->nb);
 	if (!info->fork)
-	{
-		free(info->th);
 		return (1);
-	}
 	i = -1;
 	while (++i < info->nb)
 		pthread_mutex_init(&info->fork[i], NULL);

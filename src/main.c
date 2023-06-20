@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:56:54 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/07 22:39:34 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:53:35 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,56 +14,68 @@
 
 // Nb_of_philo - Time_to_die - Time_to_eat - Time_to_sleep - times_eaten(opt)
 
+static int	ft_subroutine(t_philo *philo)
+{
+	if (philo->nb % 2 == 0)
+	{
+		if (ft_sleep(philo))
+			return (1);
+	}
+	if (ft_iseating(philo))
+		return (1);
+	if (ft_sleep(philo))
+		return (1);
+	if (ft_isthinking(philo))
+		return (1);
+	return (0);
+}
+
 void	*ft_routine(void *args)
 {
 	t_philo	*philo;
 
 	philo = args;
-	if (philo->nb % 2 == 1)
-		ft_sleep(philo->info->tte);
-	ft_isdead(philo);
-	if (philo->info->died)
-		return (NULL);
-	ft_print_status(philo, "is thinking...\n");
-	ft_isdead(philo);
+	while (1)
+	{
+		if (ft_isdead(philo))
+			break ;
+		ft_subroutine(philo);
+	}
 	return (0);
 }
 
-int	ft_create_threads(t_info *info)
+int	ft_create_threads(t_info *info, t_philo **philo)
 {
-	t_philo	*philo;
+	t_philo	*tmp;
 	int		i;
 
-	philo = malloc(sizeof(t_philo) * (info->nb));
-	if (!philo)
-		return (1);
+	tmp = *(philo);
 	info->time = ft_time();
 	i = -1;
-	while (++i < info->nb)
+	while (tmp->next)
 	{
-		philo[i].info = info;
-		philo[i].nb = i + 1;
-		philo[i].lf = i + 1;
-		philo[i].rf = info->nb - 1;
-		pthread_create(&info->th[i], NULL, ft_routine, &philo[i]);
+		pthread_create(&tmp->th, NULL, ft_routine, tmp);
+		tmp = tmp->next;
 	}
 	i = -1;
 	while (++i < info->nb)
-		pthread_join(info->th[i], NULL);
-	free(info->th);
-	free(philo);
+		pthread_join(tmp->th, NULL);
+	free (tmp);
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_info	info;
+	t_philo	*philo;
 	int		i;
 
+	philo = NULL;
 	i = 0;
 	if (ft_check(argc, argv, &info))
 		return (1);
-	if (ft_create_threads(&info))
+	ft_create_list(&philo, &info);
+	if (ft_create_threads(&info, &philo))
 		return (1);
 	while (i < info.nb)
 	{
@@ -73,7 +85,6 @@ int	main(int argc, char **argv)
 	pthread_mutex_destroy(&info.dead);
 	pthread_mutex_destroy(&info.status);
 	free(info.fork);
-	free(info.th);
 	//system("leaks philosophers");
 	return (0);
 }
