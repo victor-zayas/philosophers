@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:56:54 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/20 17:53:35 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:25:32 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ void	*ft_routine(void *args)
 	philo = args;
 	while (1)
 	{
-		if (ft_isdead(philo))
+		ft_isdead(philo);
+		if (philo->info->died)
+		{
+			printf("ASSDASSFASFSADAASDAsDFAFSASFAFSSFASf\n");
 			break ;
+		}
 		ft_subroutine(philo);
 	}
 	return (0);
@@ -47,19 +51,18 @@ void	*ft_routine(void *args)
 int	ft_create_threads(t_info *info, t_philo **philo)
 {
 	t_philo	*tmp;
-	int		i;
+//	int		i;
 
 	tmp = *(philo);
 	info->time = ft_time();
-	i = -1;
 	while (tmp->next)
 	{
 		pthread_create(&tmp->th, NULL, ft_routine, tmp);
 		tmp = tmp->next;
 	}
-	i = -1;
+/* 	i = -1;
 	while (++i < info->nb)
-		pthread_join(tmp->th, NULL);
+		pthread_join(tmp->th, NULL); */
 	free (tmp);
 	return (0);
 }

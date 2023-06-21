@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:02:40 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/20 14:33:32 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:11:29 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static	int	ft_init(t_info *info)
 	pthread_mutex_init(&info->status, NULL);
 	info->died = 0;
 	info->eaten = 0;
+	info->time = 0;
+	info->start_eat = 0;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2023/06/20 13:20:46 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/06/21 12:13:01 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = philosophers
 
 # FLAGS #
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pthread -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread -g3 #-fsanitize=address#thread
 RM = /bin/rm -rf
 
 # INCLUDES #
