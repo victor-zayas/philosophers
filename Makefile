@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2023/06/21 12:13:01 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/06/21 15:00:37 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,7 @@
 NAME = philosophers
 
 # FLAGS #
-CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread -g3 #-fsanitize=address#thread
-RM = /bin/rm -rf
 
 # INCLUDES #
 INCDIR = includes/
@@ -42,8 +40,7 @@ SRCS =	main.c	\
 SRC := $(addprefix $(SRCDIR), $(SRCS))
 OBJS := $(addprefix $(OBJDIR), $(OBJS))
 
-# MAKEFILE ART #
-# COLORS #
+# ASCII COLORS #
 BLACK=\033[0;30m
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -55,6 +52,7 @@ WHITE=\033[0;37m
 PAPYRUS=\033[38;5;223m
 END=\033[0m
 
+# MAKEFILE ART #
 define PHILO
 $(PAPYRUS)
    ▄███████▄    ▄█    █▄     ▄█   ▄█        ▄██████▄     ▄████████  ▄██████▄     ▄███████▄    ▄█    █▄       ▄████████    ▄████████    ▄████████ 
@@ -86,7 +84,7 @@ $(NAME): $(OBJS)
 	echo "$$PHILO"
 
 clean:
-	rm -rf $(OBJDIR)
+	$(RM) -rf $(OBJDIR)
 	$(RM) $(OBJS)
 	echo "$(RED)༺ Objs deleted༻$(END)"
 
@@ -97,11 +95,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
-####### TOTALMENTE INNECESARIO #######
-#ifeq ($(USER), $(filter $(USER), "intra_user"))
-#		echo $$"TEXT" (Variable de entorno a exportar)
-#		osascript -e "set Volume 10" (ajustar el volumen del ordenador)
-#		say --voice="Luciana" rellenar con mensaje. (reproduce el mensaje en el idioma seleccionado)
-#endif
-####### 	  NO BORRAR		   #######

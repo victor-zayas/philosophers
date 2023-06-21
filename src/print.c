@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:42:32 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/20 15:22:20 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/21 13:36:38 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_print_status(t_philo *philo, char *s)
 	{
 		printf("Ms: %ld Philo [%d] dies of starvation\n",
 			ft_time() - philo->info->time, philo->nb);
-		exit (1);
 	}
 	else
 		printf("Ms: %ld Philo [%d] %s\n",

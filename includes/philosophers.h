@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:27:09 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/20 16:10:48 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:51:15 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,13 @@ int		ft_timediff(struct timeval time);
 int		ft_usleep(int ms);
 
 	//ACTIONS
-int		ft_isdead(t_philo *philo);
-int		ft_iseating(t_philo *philo);
+int		ft_dead(t_philo *philo);
+int		ft_eating(t_philo *philo);
 int		ft_sleep(t_philo *philo);
-int		ft_isthinking(t_philo *philo);
+int		ft_thinking(t_philo *philo);
+
+	//MAIN
+int		ft_create_threads(t_info *info, t_philo **philo);
+void	*ft_routine(void *args);
 
 #endif
