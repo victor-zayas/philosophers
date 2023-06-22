@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:42:32 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/21 13:36:38 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:02:58 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 int	ft_print_status(t_philo *philo, char *s)
 {
 	pthread_mutex_lock(&philo->info->status);
-	if (philo->info->died == 1)
-	{
-		printf("Ms: %ld Philo [%d] dies of starvation\n",
-			ft_time() - philo->info->time, philo->nb);
-	}
-	else
-		printf("Ms: %ld Philo [%d] %s\n",
-			ft_time() - philo->info->time, philo->nb, s);
+	printf("Ms: %ld Philo [%d] %s\n",
+		ft_time() - philo->info->time, philo->nb, s);
 	pthread_mutex_unlock(&philo->info->status);
 	return (0);
 }

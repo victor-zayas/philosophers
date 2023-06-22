@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:56:54 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/21 14:54:22 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:05:08 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*ft_routine(void *args)
 int	ft_create_threads(t_info *info, t_philo **philo)
 {
 	t_philo	*tmp;
-	int		i;
+//	int		i;
 
 	tmp = *(philo);
 	info->time = ft_time();
@@ -57,9 +57,10 @@ int	ft_create_threads(t_info *info, t_philo **philo)
 		if (tmp == *philo)
 			break ;
 	}
-	i = -1;
+	/* i = -1;
 	while (++i < info->nb)
-		pthread_join(tmp->th, NULL);
+		pthread_join(tmp->th, NULL); */
+	ft_dead(*philo);
 	free (tmp);
 	return (0);
 }
@@ -76,7 +77,6 @@ int	main(int argc, char **argv)
 	ft_create_list(&philo, &info);
 	if (ft_create_threads(&info, &philo))
 		return (1);
-	printf("\n\n\nSe acabo la rutina\n\n\n");
 	i = -1;
 	while (++i < info.nb)
 		pthread_mutex_destroy(&info.fork[i]);
