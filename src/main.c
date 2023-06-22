@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:56:54 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/21 17:05:08 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/22 11:12:53 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	*ft_routine(void *args)
 	philo = args;
 	while (!philo->info->died)
 	{
-		ft_dead(philo);
 		ft_subroutine(philo);
 	}
 	return (0);
@@ -46,21 +45,31 @@ void	*ft_routine(void *args)
 int	ft_create_threads(t_info *info, t_philo **philo)
 {
 	t_philo	*tmp;
-//	int		i;
+	int		i;
 
 	tmp = *(philo);
 	info->time = ft_time();
 	while (tmp->next)
 	{
-		pthread_create(&tmp->th, NULL, ft_routine, tmp);
+		if (pthread_create(&tmp->th, NULL, ft_routine, tmp) != 0)
+		{
+			perror("pthread_create error");
+			return (1);
+		}
 		tmp = tmp->next;
 		if (tmp == *philo)
 			break ;
 	}
-	/* i = -1;
+	i = -1;
 	while (++i < info->nb)
-		pthread_join(tmp->th, NULL); */
-	ft_dead(*philo);
+	{
+		if (pthread_join((*philo)->th, NULL) != 0)
+		{
+			perror("pthread_join error");
+			return (1);
+		}
+		*philo = (*philo)->next;
+	}
 	free (tmp);
 	return (0);
 }

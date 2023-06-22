@@ -30,7 +30,6 @@ static	int	ft_init(t_info *info)
 	info->eaten = 0;
 	info->time = 0;
 	info->start_eat = 0;
-	info->must_eat = 0;
 	return (0);
 }
 
@@ -52,7 +51,7 @@ static int	ft_get_args(char **argv, t_info *info)
 		info->must_eat = 0;
 	else
 	{
-		info->must_eat = atoi(argv[5]);
+		info->must_eat = ft_atoi(argv[5]);
 		if (info->must_eat <= 0)
 			return (1);
 	}
