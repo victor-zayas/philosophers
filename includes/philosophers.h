@@ -29,8 +29,8 @@ typedef struct info
 	int				ttd;
 	int				tte;
 	int				tts;
-	long			time;
-	long			start_eat;
+	int 			time;
+	int 			start_eat;
 	int				must_eat;
 	int				eaten;
 	int				died;
