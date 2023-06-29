@@ -6,12 +6,11 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:56:54 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/22 11:12:53 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/06/29 12:08:29 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-
+#include "../includes/philosophers.h"
 // Nb_of_philo - Time_to_die - Time_to_eat - Time_to_sleep - times_eaten(opt)
 
 static int	ft_subroutine(t_philo *philo)
@@ -23,6 +22,8 @@ static int	ft_subroutine(t_philo *philo)
 	}
 	if (ft_eating(philo))
 		return (1);
+    if (philo->info->p_eat == philo->info->must_eat)
+        return (1);
 	if (ft_sleep(philo))
 		return (1);
 	if (ft_thinking(philo))
@@ -65,6 +66,7 @@ int	ft_create_threads(t_info *info, t_philo **philo)
 	{
 		if (pthread_join((*philo)->th, NULL) != 0)
 		{
+			printf("HIlo : {%d}\n", i);
 			perror("pthread_join error");
 			return (1);
 		}
@@ -93,5 +95,6 @@ int	main(int argc, char **argv)
 	pthread_mutex_destroy(&info.status);
 	free(info.fork);
 	//system("leaks philosophers");
+    printf("Philo ate: %d\n", philo->info->p_eat);
 	return (0);
 }
