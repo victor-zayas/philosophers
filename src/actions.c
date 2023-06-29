@@ -56,11 +56,11 @@ int	ft_eating(t_philo *philo)
 	philo->info->start_eat = ft_time();
 	ft_usleep(philo->info->tte);
     philo->info->eaten++;
-    printf("ate %d\n", philo->info->eaten);
+    printf("philo ate %d\n", philo->info->eaten);
 	if (philo->info->eaten == philo->info->must_eat)
     {
         philo->info->p_eat++;
-        printf("philo %d ate\n", philo->info->p_eat++);
+        printf("Breakpoint %d\n", philo->info->p_eat);
     }
 	pthread_mutex_unlock(&philo->info->fork[philo->lf]);
 	pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);

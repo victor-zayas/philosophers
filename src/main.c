@@ -23,7 +23,12 @@ static int	ft_subroutine(t_philo *philo)
 	if (ft_eating(philo))
 		return (1);
     if (philo->info->p_eat == philo->info->must_eat)
+    {
+        pthread_mutex_lock(&philo->info->status);
+        printf("SE CUM\n");
+        pthread_mutex_unlock(&philo->info->status);
         return (1);
+    }
 	if (ft_sleep(philo))
 		return (1);
 	if (ft_thinking(philo))
