@@ -69,8 +69,6 @@ int	ft_eating(t_philo *philo)
         printf("PHILO %d END EAT\n", philo->nb);
         pthread_mutex_unlock(&philo->info->status);
     }
-	pthread_mutex_unlock(&philo->info->fork[philo->lf]);
-	pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);
     if (philo->info->eaten == philo->info->nb)
     {
         pthread_mutex_unlock(&philo->info->fork[philo->lf]);
@@ -80,6 +78,8 @@ int	ft_eating(t_philo *philo)
         pthread_mutex_unlock(&philo->info->status);
         return (1);
     }
+	pthread_mutex_unlock(&philo->info->fork[philo->lf]);
+	pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);
 	ft_dead(philo);
 	return (0);
 }
@@ -94,7 +94,6 @@ int	ft_sleep(t_philo *philo)
 
 int	ft_thinking(t_philo *philo)
 {
-	//ft_dead(philo);
 	ft_print_status(philo, "is thinking...\n");
 	ft_usleep(philo->info->ttd - (philo->info->tts + philo->info->tte));
 	ft_dead(philo);

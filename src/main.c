@@ -21,7 +21,12 @@ static int	ft_subroutine(t_philo *philo)
 			return (1);
 	}
 	if (ft_eating(philo))
+    {
+        pthread_mutex_lock(&philo->info->status);
+        printf("SALIDAAAAAA\n");
+        pthread_mutex_unlock(&philo->info->status);
 		return (1);
+    }
     if (philo->info->eaten == philo->info->nb)
     {
         pthread_mutex_lock(&philo->info->status);
@@ -44,7 +49,8 @@ void	*ft_routine(void *args)
     philo->ate = 0;
 	while (!philo->info->died)
 	{
-		ft_subroutine(philo);
+		if (ft_subroutine(philo))
+            break ;
 	}
 	return (0);
 }

@@ -51,7 +51,7 @@ typedef struct philo
 }	t_philo;
 
 
-// PROT
+// PROTOTIPE
 	//LIB
 int		ft_atoi(const char *str);
 t_philo	*ft_lstnew(int id, t_info *info);
@@ -72,7 +72,6 @@ int		ft_print_info(t_info *info);
 
 	//TIME
 int		ft_time(void);
-int		ft_timediff(struct timeval time);
 void		ft_usleep(int ms);
 
 	//ACTIONS

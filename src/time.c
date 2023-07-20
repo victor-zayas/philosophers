@@ -28,12 +28,3 @@ void    ft_usleep(int ms)
     while (ft_time() - start_time < ms)
         usleep(100);
 }
-
-/* int	ft_timediff(struct timeval time)
-{
-	struct timeval	diff;
-
-	gettimeofday(&diff, NULL);
-	return (((diff.tv_sec * 1000) + (diff.tv_usec / 1000))
-		- ((time.tv_sec * 1000) + (time.tv_usec / 1000)));
-} */
