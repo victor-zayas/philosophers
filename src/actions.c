@@ -55,15 +55,31 @@ int	ft_eating(t_philo *philo)
 	}
 	philo->info->start_eat = ft_time();
 	ft_usleep(philo->info->tte);
-    philo->info->eaten++;
-    printf("philo ate %d\n", philo->info->eaten);
-	if (philo->info->eaten == philo->info->must_eat)
+    if (philo->info->must_eat)
     {
-        philo->info->p_eat++;
-        printf("Breakpoint %d\n", philo->info->p_eat);
+        philo->ate++;
+        pthread_mutex_lock(&philo->info->status);
+        printf("philo %d eaten %d\n", philo->nb, philo->ate);
+        pthread_mutex_unlock(&philo->info->status);
+    }
+	if (philo->ate == philo->info->must_eat)
+    {
+        philo->info->eaten++;
+        pthread_mutex_lock(&philo->info->status);
+        printf("PHILO %d END EAT\n", philo->nb);
+        pthread_mutex_unlock(&philo->info->status);
     }
 	pthread_mutex_unlock(&philo->info->fork[philo->lf]);
 	pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);
+    if (philo->info->eaten == philo->info->nb)
+    {
+        pthread_mutex_unlock(&philo->info->fork[philo->lf]);
+        pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);
+        pthread_mutex_lock(&philo->info->status);
+        printf("SALE\n");
+        pthread_mutex_unlock(&philo->info->status);
+        return (1);
+    }
 	ft_dead(philo);
 	return (0);
 }

@@ -33,7 +33,6 @@ typedef struct info
 	int 			start_eat;
 	int				must_eat;
 	int				eaten;
-	int				p_eat;
 	int				died;
 	pthread_mutex_t	status;
 	pthread_mutex_t	*fork;
@@ -46,6 +45,7 @@ typedef struct philo
 	pthread_t		th;
 	int				nb;
 	int				lf;
+    int             ate;
 	t_info			*info;
 	struct philo	*next;
 }	t_philo;
@@ -73,7 +73,7 @@ int		ft_print_info(t_info *info);
 	//TIME
 int		ft_time(void);
 int		ft_timediff(struct timeval time);
-int		ft_usleep(int ms);
+void		ft_usleep(int ms);
 
 	//ACTIONS
 int		ft_dead(t_philo *philo);

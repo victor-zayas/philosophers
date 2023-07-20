@@ -28,7 +28,6 @@ static	int	ft_init(t_info *info)
 	pthread_mutex_init(&info->status, NULL);
 	info->died = 0;
 	info->eaten = 0;
-	info->p_eat = 0;
 	info->time = 0;
 	info->start_eat = 0;
 	return (0);

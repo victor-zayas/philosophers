@@ -22,10 +22,10 @@ static int	ft_subroutine(t_philo *philo)
 	}
 	if (ft_eating(philo))
 		return (1);
-    if (philo->info->p_eat == philo->info->must_eat)
+    if (philo->info->eaten == philo->info->nb)
     {
         pthread_mutex_lock(&philo->info->status);
-        printf("SE CUM\n");
+        printf("SALIDA\n");
         pthread_mutex_unlock(&philo->info->status);
         return (1);
     }
@@ -41,6 +41,7 @@ void	*ft_routine(void *args)
 	t_philo	*philo;
 
 	philo = args;
+    philo->ate = 0;
 	while (!philo->info->died)
 	{
 		ft_subroutine(philo);
@@ -100,6 +101,5 @@ int	main(int argc, char **argv)
 	pthread_mutex_destroy(&info.status);
 	free(info.fork);
 	//system("leaks philosophers");
-    printf("Philo ate: %d\n", philo->info->p_eat);
 	return (0);
 }

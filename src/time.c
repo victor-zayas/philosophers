@@ -20,12 +20,13 @@ int	ft_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-int	ft_usleep(int ms)
+void    ft_usleep(int ms)
 {
-	long	tmp;
+    long	start_time;
 
-	tmp = usleep(ms);
-	return (tmp / 1000);
+    start_time = ft_time();
+    while (ft_time() - start_time < ms)
+        usleep(100);
 }
 
 /* int	ft_timediff(struct timeval time)
