@@ -29,6 +29,7 @@ static	int	ft_init(t_info *info)
 	info->eaten = 0;
 	info->time = 0;
 	info->start_eat = 0;
+    info->running = 1;
 	return (0);
 }
 

@@ -34,6 +34,7 @@ typedef struct info
 	int				must_eat;
 	int				eaten;
 	int				died;
+    unsigned short  running;
 	pthread_mutex_t	status;
 	pthread_mutex_t	*fork;
 }	t_info;

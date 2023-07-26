@@ -16,7 +16,7 @@
 NAME = philosophers
 
 # FLAGS #
-CFLAGS = -Wall -Wextra -Werror -pthread -g3 #-fsanitize=address#thread
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address#thread
 
 # INCLUDES #
 INCDIR = includes/

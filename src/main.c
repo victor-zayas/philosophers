@@ -17,13 +17,23 @@ static int	ft_subroutine(t_philo *philo)
 {
 	if (ft_eating(philo))
         return (1);
-    if (philo->info->eaten == philo->info->nb)
+    if (philo->info->running == 0)
         return (1);
 	if (ft_sleep(philo))
         return (1);
 	if (ft_thinking(philo))
 		return (1);
 	return (0);
+}
+
+int checkrunning(t_philo	*philo)
+{
+    int b;
+    pthread_mutex_lock(&philo->info->status);
+    b = philo->info->running;
+    pthread_mutex_unlock(&philo->info->status);
+    return (b);
+
 }
 
 void	*ft_routine(void *args)
@@ -34,7 +44,7 @@ void	*ft_routine(void *args)
     philo->ate = 0;
     if (philo->nb % 2 == 0)
         ft_usleep(50);
-	while (!philo->info->died)
+	while (checkrunning(philo))
 	{
         ft_dead(philo);
 		if (ft_subroutine(philo))
@@ -82,6 +92,7 @@ int	main(int argc, char **argv)
 	i = -1;
 	while (++i < info.nb)
 		pthread_mutex_destroy(&info.fork[i]);
+    pthread_mutex_unlock(&info.status);
 	pthread_mutex_destroy(&info.status);
 	free(info.fork);
 	//system("leaks philosophers");
