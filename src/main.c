@@ -15,27 +15,12 @@
 
 static int	ft_subroutine(t_philo *philo)
 {
-	if (philo->nb % 2 == 0)
-	{
-		if (ft_sleep(philo))
-			return (1);
-	}
 	if (ft_eating(philo))
-    {
-        pthread_mutex_lock(&philo->info->status);
-        printf("SALIDAAAAAA\n");
-        pthread_mutex_unlock(&philo->info->status);
-		return (1);
-    }
-    if (philo->info->eaten == philo->info->nb)
-    {
-        pthread_mutex_lock(&philo->info->status);
-        printf("SALIDA\n");
-        pthread_mutex_unlock(&philo->info->status);
         return (1);
-    }
+    if (philo->info->eaten == philo->info->nb)
+        return (1);
 	if (ft_sleep(philo))
-		return (1);
+        return (1);
 	if (ft_thinking(philo))
 		return (1);
 	return (0);
@@ -47,15 +32,18 @@ void	*ft_routine(void *args)
 
 	philo = args;
     philo->ate = 0;
+    if (philo->nb % 2 == 0)
+        ft_usleep(50);
 	while (!philo->info->died)
 	{
+        ft_dead(philo);
 		if (ft_subroutine(philo))
             break ;
-	}
+    }
 	return (0);
 }
 
-int	ft_create_threads(t_info *info, t_philo **philo)
+void	ft_create_threads(t_info *info, t_philo **philo)
 {
 	t_philo	*tmp;
 	int		i;
@@ -64,11 +52,8 @@ int	ft_create_threads(t_info *info, t_philo **philo)
 	info->time = ft_time();
 	while (tmp->next)
 	{
-		if (pthread_create(&tmp->th, NULL, ft_routine, tmp) != 0)
-		{
-			perror("pthread_create error");
-			return (1);
-		}
+		if (pthread_create(&tmp->th, NULL, ft_routine, tmp))
+			return ;
 		tmp = tmp->next;
 		if (tmp == *philo)
 			break ;
@@ -77,15 +62,10 @@ int	ft_create_threads(t_info *info, t_philo **philo)
 	while (++i < info->nb)
 	{
 		if (pthread_join((*philo)->th, NULL) != 0)
-		{
-			printf("HIlo : {%d}\n", i);
-			perror("pthread_join error");
-			return (1);
-		}
+			return ;
 		*philo = (*philo)->next;
 	}
 	free (tmp);
-	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -98,12 +78,10 @@ int	main(int argc, char **argv)
 	if (ft_check(argc, argv, &info))
 		return (1);
 	ft_create_list(&philo, &info);
-	if (ft_create_threads(&info, &philo))
-		return (1);
+	ft_create_threads(&info, &philo);
 	i = -1;
 	while (++i < info.nb)
 		pthread_mutex_destroy(&info.fork[i]);
-	pthread_mutex_destroy(&info.dead);
 	pthread_mutex_destroy(&info.status);
 	free(info.fork);
 	//system("leaks philosophers");

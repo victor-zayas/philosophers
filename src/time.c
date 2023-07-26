@@ -20,11 +20,23 @@ int	ft_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-void    ft_usleep(int ms)
+static	unsigned int	get_time_diff(struct timeval __time)
 {
-    long	start_time;
+    struct timeval  	diff;
+    unsigned int		time;
+    unsigned int		diff_time;
 
-    start_time = ft_time();
-    while (ft_time() - start_time < ms)
-        usleep(100);
+    gettimeofday(&diff, NULL);
+    time = (__time.tv_sec * 1000 + __time.tv_usec / 1000);
+    diff_time = (diff.tv_sec * 1000 + diff.tv_usec / 1000);
+    return (diff_time - time);
+}
+
+void	ft_usleep(unsigned int ms)
+{
+    struct timeval	time;
+
+    gettimeofday(&time, NULL);
+    while (ms > get_time_diff(time))
+        usleep(50);
 }

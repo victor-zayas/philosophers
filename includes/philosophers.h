@@ -36,8 +36,6 @@ typedef struct info
 	int				died;
 	pthread_mutex_t	status;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	dead;
-
 }	t_info;
 
 typedef struct philo
@@ -54,7 +52,7 @@ typedef struct philo
 // PROTOTIPE
 	//LIB
 int		ft_atoi(const char *str);
-t_philo	*ft_lstnew(int id, t_info *info);
+t_philo *ft_lstnew(int id, t_info *info);
 void	ft_lstadd_back(t_philo **lst, t_philo *new);
 void	ft_create_list(t_philo **philo, t_info *info);
 
@@ -67,12 +65,10 @@ int		ft_check(int argc, char **argv, t_info *info);
 
 	//PRINT
 int		ft_print_status(t_philo *philo, char *s);
-int		ft_print_philo(t_philo *philo);
-int		ft_print_info(t_info *info);
 
 	//TIME
 int		ft_time(void);
-void		ft_usleep(int ms);
+void	ft_usleep(unsigned int ms);
 
 	//ACTIONS
 int		ft_dead(t_philo *philo);
@@ -81,7 +77,7 @@ int		ft_sleep(t_philo *philo);
 int		ft_thinking(t_philo *philo);
 
 	//MAIN
-int		ft_create_threads(t_info *info, t_philo **philo);
+void	ft_create_threads(t_info *info, t_philo **philo);
 void	*ft_routine(void *args);
 
 #endif

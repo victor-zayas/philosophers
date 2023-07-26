@@ -14,14 +14,11 @@
 
 int	ft_dead(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->info->dead);
-	if ((ft_time() - philo->info->start_eat) > philo->info->ttd || philo->info->nb == 1)
+	if ((ft_time() - philo->info->start_eat) >= philo->info->ttd)
 	{
 		philo->info->died = 1;
-		pthread_mutex_unlock(&philo->info->dead);
-		return (1);
+        return (1);
 	}
-	pthread_mutex_unlock(&philo->info->dead);
 	return (0);
 }
 
@@ -62,25 +59,16 @@ int	ft_eating(t_philo *philo)
         printf("philo %d eaten %d\n", philo->nb, philo->ate);
         pthread_mutex_unlock(&philo->info->status);
     }
-	if (philo->ate == philo->info->must_eat)
-    {
+    if (philo->ate == philo->info->must_eat && philo->info->must_eat)
         philo->info->eaten++;
-        pthread_mutex_lock(&philo->info->status);
-        printf("PHILO %d END EAT\n", philo->nb);
-        pthread_mutex_unlock(&philo->info->status);
-    }
     if (philo->info->eaten == philo->info->nb)
     {
         pthread_mutex_unlock(&philo->info->fork[philo->lf]);
         pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);
-        pthread_mutex_lock(&philo->info->status);
-        printf("SALE\n");
-        pthread_mutex_unlock(&philo->info->status);
         return (1);
     }
-	pthread_mutex_unlock(&philo->info->fork[philo->lf]);
+    pthread_mutex_unlock(&philo->info->fork[philo->lf]);
 	pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);
-	ft_dead(philo);
 	return (0);
 }
 
@@ -88,7 +76,6 @@ int	ft_sleep(t_philo *philo)
 {
 	ft_print_status(philo, "is sleeping...\n");
 	ft_usleep(philo->info->tts);
-	ft_dead(philo);
 	return (0);
 }
 
@@ -96,6 +83,5 @@ int	ft_thinking(t_philo *philo)
 {
 	ft_print_status(philo, "is thinking...\n");
 	ft_usleep(philo->info->ttd - (philo->info->tts + philo->info->tte));
-	ft_dead(philo);
 	return (0);
 }

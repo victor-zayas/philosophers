@@ -24,7 +24,6 @@ static	int	ft_init(t_info *info)
 	i = -1;
 	while (++i < info->nb)
 		pthread_mutex_init(&info->fork[i], NULL);
-	pthread_mutex_init(&info->dead, NULL);
 	pthread_mutex_init(&info->status, NULL);
 	info->died = 0;
 	info->eaten = 0;
