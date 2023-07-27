@@ -17,15 +17,7 @@ int	ft_print_status(t_philo *philo, char *s)
     pthread_mutex_lock(&philo->info->status);
     if (!philo->info->running)
         return(1);
-	if (philo->info->died)
-	{
-		printf("Ms: %d Philo [%d] died\n",
-			ft_time() - philo->info->time, philo->nb);
-		pthread_mutex_unlock(&philo->info->status);
-		return (1);
-	}
-	printf("Ms: %d Philo [%d] %s\n",
-		ft_time() - philo->info->time, philo->nb, s);
+	printf("Ms: %d Philo [%d] %s\n", ft_time() - philo->info->time, philo->nb, s);
     pthread_mutex_unlock(&philo->info->status);
     return (0);
 }

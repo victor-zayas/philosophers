@@ -19,6 +19,7 @@ int	ft_dead(t_philo *philo)
         pthread_mutex_lock(&philo->info->status);
         philo->info->died = 1;
         philo->info->running = 0;
+        printf("Ms: %d Philo [%d] died\n", ft_time() - philo->info->time, philo->nb);
         pthread_mutex_unlock(&philo->info->status);
         return (1);
 	}
@@ -32,9 +33,6 @@ int	ft_eating(t_philo *philo)
 		pthread_mutex_lock(&philo->info->fork[philo->lf]);
 		if (ft_print_status(philo, "has taken the left fork...\n"))
 		{
-//            pthread_mutex_lock(&philo->info->status);
-//            philo->info->running = 0;
-//            pthread_mutex_unlock(&philo->info->status);
 			pthread_mutex_unlock(&philo->info->fork[philo->lf]);
 			return (1);
 		}
@@ -60,6 +58,7 @@ int	ft_eating(t_philo *philo)
     pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);
 	philo->info->start_eat = ft_time();
 	ft_usleep(philo->info->tte);
+    ft_dead(philo);
     if (philo->info->must_eat)
     {
         pthread_mutex_lock(&philo->info->status);
@@ -73,16 +72,7 @@ int	ft_eating(t_philo *philo)
         pthread_mutex_unlock(&philo->info->status);
     }
     if (philo->info->eaten == philo->info->nb)
-    {
-        ft_print_status(philo, "ha terminado de comer\n");
-        pthread_mutex_lock(&philo->info->status);
-        printf("XDDDDDDD\n");
-        philo->info->running = 0;
-        printf("valor de running in eating: %d\n", philo->info->running);
-        pthread_mutex_unlock(&philo->info->status);
-        ft_print_status(philo, "FIN\n");
         return (1);
-    }
 	return (0);
 }
 
