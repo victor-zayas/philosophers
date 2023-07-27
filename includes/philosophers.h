@@ -26,11 +26,10 @@
 typedef struct info
 {
 	int				nb;
-	int				ttd;
-	int				tte;
-	int				tts;
-	int 			time;
-	int 			start_eat;
+	long			ttd;
+	long			tte;
+	long			tts;
+	long 			time;
 	int				must_eat;
 	int				eaten;
 	int				died;
@@ -45,6 +44,7 @@ typedef struct philo
 	int				nb;
 	int				lf;
     int             ate;
+	long 			start_eat;
 	t_info			*info;
 	struct philo	*next;
 }	t_philo;
@@ -68,14 +68,14 @@ int		ft_check(int argc, char **argv, t_info *info);
 int		ft_print_status(t_philo *philo, char *s);
 
 	//TIME
-int		ft_time(void);
+long		ft_time(void);
 void	ft_usleep(unsigned int ms);
 
 	//ACTIONS
-int		ft_dead(t_philo *philo);
-int		ft_eating(t_philo *philo);
-int		ft_sleep(t_philo *philo);
-int		ft_thinking(t_philo *philo);
+void	ft_dead(t_philo *philo);
+void	ft_eating(t_philo *philo);
+void	ft_sleep(t_philo *philo);
+void	ft_thinking(t_philo *philo);
 
 	//MAIN
 void	ft_create_threads(t_info *info, t_philo **philo);

@@ -16,14 +16,21 @@
 
 static int	ft_subroutine(t_philo *philo)
 {
-	if (ft_eating(philo))
-        return (1);
-    if (philo->info->running == 0)
-        return (1);
-	if (ft_sleep(philo))
-        return (1);
-	if (ft_thinking(philo))
-		return (1);
+	if (philo->info->running != 0)
+	{
+		ft_eating(philo);
+		ft_dead(philo);
+	}
+	if (philo->info->running != 0)
+	{
+		ft_sleep(philo);
+		ft_dead(philo);
+	}
+	if (philo->info->running != 0)
+	{
+		ft_thinking(philo);
+		ft_dead(philo);
+	}
 	return (0);
 }
 
@@ -33,11 +40,12 @@ void	*ft_routine(void *args)
 
 	philo = args;
     philo->ate = 0;
+	philo->start_eat = 0;
     if (philo->nb % 2 == 0)
-        ft_usleep(50);
-	while (philo->info->running)
+        ft_usleep(philo->info->tte);
+	while (philo->info->running != 0)
 	{
-        ft_dead(philo);
+		ft_dead(philo);
 		if (ft_subroutine(philo))
             break ;
     }
