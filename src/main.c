@@ -14,41 +14,21 @@
 
 // Nb_of_philo - Time_to_die - Time_to_eat - Time_to_sleep - times_eaten(opt)
 
-static int	ft_subroutine(t_philo *philo)
-{
-	if (philo->info->running != 0)
-	{
-		ft_eating(philo);
-		ft_dead(philo);
-	}
-	if (philo->info->running != 0)
-	{
-		ft_sleep(philo);
-		ft_dead(philo);
-	}
-	if (philo->info->running != 0)
-	{
-		ft_thinking(philo);
-		ft_dead(philo);
-	}
-	return (0);
-}
-
 void	*ft_routine(void *args)
 {
 	t_philo	*philo;
 
 	philo = args;
-    philo->ate = 0;
-	philo->start_eat = 0;
-    if (philo->nb % 2 == 0)
-        ft_usleep(philo->info->tte);
+	philo->ate = 0;
+	philo->last_eat = 0;
+	if (philo->nb % 2 == 0)
+		ft_usleep(philo->info->tte - 20, philo);
 	while (philo->info->running != 0)
 	{
-		ft_dead(philo);
-		if (ft_subroutine(philo))
-            break ;
-    }
+		ft_eating(philo);
+		ft_sleep(philo);
+		ft_thinking(philo);
+	}
 	return (0);
 }
 
@@ -77,6 +57,17 @@ void	ft_create_threads(t_info *info, t_philo **philo)
 	free (tmp);
 }
 
+void ft_print_philos(t_philo *philo)
+{
+	while (philo)
+	{
+		printf("PHILO NB = %d\n", philo->nb);
+		printf("lf = %d\n", philo->lf);
+		printf("rf = %d\n", philo->next->lf);
+		philo = philo->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_info	info;
@@ -87,6 +78,7 @@ int	main(int argc, char **argv)
 	if (ft_check(argc, argv, &info))
 		return (1);
 	ft_create_list(&philo, &info);
+	//ft_print_philos(philo);
 	ft_create_threads(&info, &philo);
 	i = -1;
 	while (++i < info.nb)

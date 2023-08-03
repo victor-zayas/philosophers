@@ -20,11 +20,14 @@ long	ft_time(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void	ft_usleep(unsigned int ms)
+void	ft_usleep(unsigned int ms, t_philo *philo)
 {
 	long	start_time;
 
 	start_time = ft_time();
 	while (ft_time() - start_time < ms)
-		usleep(100);
+	{
+		ft_dead(philo);
+		usleep(10);
+	}
 } 

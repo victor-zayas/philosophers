@@ -14,8 +14,12 @@
 
 int	ft_print_status(t_philo *philo, char *s)
 {
-    pthread_mutex_lock(&philo->info->status);
-	printf("Ms: %ld Philo [%d] %s\n", ft_time() - philo->info->time, philo->nb, s);
-    pthread_mutex_unlock(&philo->info->status);
+    ft_dead(philo);
+    if (philo->info->running != 0)
+    {
+        pthread_mutex_lock(&philo->info->status);
+        printf("Ms: %ld Philo [%d] %s\n", ft_time() - philo->info->time, philo->nb, s);
+        pthread_mutex_unlock(&philo->info->status);
+    }
     return (0);
 }

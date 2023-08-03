@@ -47,7 +47,7 @@ t_philo	*ft_lstnew(int id, t_info *info)
 		return (NULL);
 	node->info = info;
 	node->nb = id;
-	node->lf = id;
+	node->lf = id - 1;
 	node->next = NULL;
 	return (node);
 }

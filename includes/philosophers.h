@@ -44,7 +44,7 @@ typedef struct philo
 	int				nb;
 	int				lf;
     int             ate;
-	long 			start_eat;
+	long 			last_eat;
 	t_info			*info;
 	struct philo	*next;
 }	t_philo;
@@ -69,7 +69,7 @@ int		ft_print_status(t_philo *philo, char *s);
 
 	//TIME
 long		ft_time(void);
-void	ft_usleep(unsigned int ms);
+void	ft_usleep(unsigned int ms, t_philo *philo);
 
 	//ACTIONS
 void	ft_dead(t_philo *philo);
