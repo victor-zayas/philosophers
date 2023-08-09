@@ -37,7 +37,7 @@ void	ft_eating(t_philo *philo)
     ft_print_status(philo, "has taken the right fork...\n");
     ft_print_status(philo, "is eating...\n");
     philo->last_eat = ft_time() - philo->info->time;
-    ft_usleep(philo->info->tte, philo);
+    ft_usleep(philo->info->tte);
     pthread_mutex_unlock(&philo->info->fork[philo->lf]);
     ft_print_status(philo, "has left the left fork...\n");
     pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);
@@ -50,16 +50,16 @@ void    ft_must_eat(t_philo *philo)
     if (philo->info->must_eat)
     {
         philo->ate++;
-        pthread_mutex_lock(&philo->info->status);
-        printf("PHILO ATE: %d\n", philo->ate);
-        pthread_mutex_unlock(&philo->info->status);
+//        pthread_mutex_lock(&philo->info->status);
+//        printf("PHILO %d ATE: %d TIMES\n", philo->nb, philo->ate);
+//        pthread_mutex_unlock(&philo->info->status);
     }
     if (philo->ate == philo->info->must_eat && philo->info->must_eat)
     {
         philo->info->eaten++;
-        pthread_mutex_lock(&philo->info->status);
-        printf("PHILO completed: %d\n", philo->info->eaten);
-        pthread_mutex_unlock(&philo->info->status);
+//        pthread_mutex_lock(&philo->info->status);
+//        printf("PHILO finished: %d\n", philo->info->eaten);
+//        pthread_mutex_unlock(&philo->info->status);
     }
     if (philo->info->eaten == philo->info->nb)
         philo->info->running = 0;
@@ -68,7 +68,7 @@ void    ft_must_eat(t_philo *philo)
 void	ft_sleep(t_philo *philo)
 {
 	ft_print_status(philo, "is sleeping...\n");
-	ft_usleep(philo->info->tts, philo);
+	ft_usleep(philo->info->tts);
 }
 
 void	ft_thinking(t_philo *philo)

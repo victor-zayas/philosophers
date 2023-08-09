@@ -34,10 +34,11 @@ void *ft_routine(void *args)
     philo->ate = 0;
     philo->last_eat = 0;
     if (philo->nb % 2 == 0)
-        ft_usleep(philo->info->tte - 20, philo);
+        ft_usleep(philo->info->tte - 20);
     pthread_create(&check_thread, NULL, ft_check_dead, philo);
     while (philo->info->running != 0)
     {
+//        if (philo->info->eaten < philo->info->nb)
         ft_eating(philo);
         ft_sleep(philo);
         ft_thinking(philo);
@@ -45,24 +46,6 @@ void *ft_routine(void *args)
     pthread_join(check_thread, NULL);
     return (NULL);
 }
-
-//void	*ft_routine(void *args)
-//{
-//	t_philo	*philo;
-//
-//	philo = args;
-//	philo->ate = 0;
-//	philo->last_eat = 0;
-//	if (philo->nb % 2 == 0)
-//		ft_usleep(philo->info->tte - 20, philo);
-//	while (philo->info->running != 0)
-//	{
-//		ft_eating(philo);
-//        ft_sleep(philo);
-//        ft_thinking(philo);
-//    }
-//    return (0);
-//}
 
 void	ft_create_threads(t_info *info, t_philo **philo)
 {
@@ -85,8 +68,6 @@ void	ft_create_threads(t_info *info, t_philo **philo)
 		if (pthread_join((*philo)->th, NULL) != 0)
 			return ;
 		*philo = (*philo)->next;
-//        pthread_detach((*philo)->th);
-//        *philo = (*philo)->next;
 	}
 	free (tmp);
 }

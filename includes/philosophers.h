@@ -70,7 +70,7 @@ int		ft_print_status(t_philo *philo, char *s);
 
 	//TIME
 long		ft_time(void);
-void	ft_usleep(unsigned int ms, t_philo *philo);
+void	ft_usleep(unsigned int ms);
 
 	//ACTIONS
 void	ft_dead(t_philo *philo);
