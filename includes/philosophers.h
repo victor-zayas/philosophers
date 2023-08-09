@@ -50,16 +50,17 @@ typedef struct philo
 }	t_philo;
 
 
-// PROTOTIPE
+// PROTOTYPE
+
+	//LIB_UTILS
+int		ft_isdigit(int c);
+t_philo	*ft_lstlast(t_philo *lst);
+
 	//LIB
 int		ft_atoi(const char *str);
 t_philo *ft_lstnew(int id, t_info *info);
 void	ft_lstadd_back(t_philo **lst, t_philo *new);
 void	ft_create_list(t_philo **philo, t_info *info);
-
-	//LIB_UTILS
-int		ft_isdigit(int c);
-t_philo	*ft_lstlast(t_philo *lst);
 
 	//INIT_ARGS
 int		ft_check(int argc, char **argv, t_info *info);
@@ -74,6 +75,7 @@ void	ft_usleep(unsigned int ms, t_philo *philo);
 	//ACTIONS
 void	ft_dead(t_philo *philo);
 void	ft_eating(t_philo *philo);
+void    ft_must_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_thinking(t_philo *philo);
 

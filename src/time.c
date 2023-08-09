@@ -28,6 +28,6 @@ void	ft_usleep(unsigned int ms, t_philo *philo)
 	while (ft_time() - start_time < ms)
 	{
 		ft_dead(philo);
-		usleep(10);
+		usleep(100);
 	}
 } 
