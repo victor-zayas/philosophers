@@ -52,11 +52,12 @@ typedef struct philo
 
 // PROTOTYPE
 
-	//LIB_UTILS
+	//UTILS
 int		ft_isdigit(int c);
 t_philo	*ft_lstlast(t_philo *lst);
+void	free_mem(t_philo *head, t_info *info);
 
-	//LIB
+	//CREATE_LIST
 int		ft_atoi(const char *str);
 t_philo *ft_lstnew(int id, t_info *info);
 void	ft_lstadd_back(t_philo **lst, t_philo *new);

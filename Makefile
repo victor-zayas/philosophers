@@ -16,7 +16,7 @@
 NAME = philosophers
 
 # FLAGS #
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address#thread
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 # INCLUDES #
 INCDIR = includes/
@@ -79,7 +79,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $(NAME)
-#	open The_file/philosophers.jpeg
+	open The_file/philosophers.jpeg
 	echo "$(BLUE)༺ Program compiled༻$(END)"
 	echo "$$PHILO"
 

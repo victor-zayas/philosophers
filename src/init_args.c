@@ -64,12 +64,10 @@ int	ft_check(int argc, char **argv, t_info *info)
 	if (argc < 5)
 	{
 		return (1);
-		printf("there are not enough arguments\n");
 	}
 	if (argc > 6)
 	{
 		return (1);
-		printf("there are too many arguments\n");
 	}
 	if (ft_get_args(argv, info))
 		return (1);

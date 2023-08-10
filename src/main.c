@@ -12,15 +12,7 @@
 
 #include "../includes/philosophers.h"
 
-// Nb_of_philo - Time_to_die - Time_to_eat - Time_to_sleep - times_eaten(opt)
-
-//cuenta de cuantos han comida X veces
-//si despues de iterar por todos los philos
-//X es igual a la cantidad total de philos
-//es que han comido todos y tiene que salir del programa
-//sino es que todavia no han terminado de comer
-
-void *ft_check_dead(void *args) //TODO hacer que pare en el momento exacto que todos acaban de comer;
+void *ft_check_dead(void *args)
 {
     t_philo *philo = args;
 
@@ -88,14 +80,12 @@ int	main(int argc, char **argv)
 	if (ft_check(argc, argv, &info))
 		return (1);
 	ft_create_list(&philo, &info);
-//	ft_print_philo(philo);
 	ft_create_threads(&info, &philo);
 	i = -1;
 	while (++i < info.nb)
 		pthread_mutex_destroy(&info.fork[i]);
-//    pthread_mutex_unlock(&info.status);
 	pthread_mutex_destroy(&info.status);
 	free(info.fork);
-	//system("leaks philosophers");
+    free_mem(&*philo, &info);
 	return (0);
 }

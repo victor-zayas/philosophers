@@ -29,3 +29,17 @@ t_philo	*ft_lstlast(t_philo *lst)
 	}
 	return (lst);
 }
+
+void	free_mem(t_philo *head, t_info *info)
+{
+    t_philo	*aux;
+
+    while (info->nb)
+    {
+        aux = head;
+        head = head->next;
+        free(aux);
+        info->nb--;
+    }
+    free(info);
+}
