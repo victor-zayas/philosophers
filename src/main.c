@@ -14,7 +14,13 @@
 
 // Nb_of_philo - Time_to_die - Time_to_eat - Time_to_sleep - times_eaten(opt)
 
-void *ft_check_dead(void *args)
+//cuenta de cuantos han comida X veces
+//si despues de iterar por todos los philos
+//X es igual a la cantidad total de philos
+//es que han comido todos y tiene que salir del programa
+//sino es que todavia no han terminado de comer
+
+void *ft_check_dead(void *args) //TODO hacer que pare en el momento exacto que todos acaban de comer;
 {
     t_philo *philo = args;
 
@@ -38,12 +44,12 @@ void *ft_routine(void *args)
     pthread_create(&check_thread, NULL, ft_check_dead, philo);
     while (philo->info->running != 0)
     {
-//        if (philo->info->eaten < philo->info->nb)
-        ft_eating(philo);
+        if (philo->info->eaten < philo->info->nb)
+            ft_eating(philo);
         ft_sleep(philo);
         ft_thinking(philo);
     }
-    pthread_join(check_thread, NULL);
+    pthread_detach(check_thread);
     return (NULL);
 }
 
@@ -72,24 +78,6 @@ void	ft_create_threads(t_info *info, t_philo **philo)
 	free (tmp);
 }
 
-void ft_print_philos(t_philo *philo)
-{
-	while (philo)
-	{
-        printf("STRUCT\n");
-        printf("NB of philos: %d\n", philo->info->nb);
-        printf("Time to DIE: %ld\n", philo->info->ttd);
-        printf("Time to EAT: %ld\n", philo->info->tte);
-        printf("Time to SLEEP: %ld\n", philo->info->tts);
-        printf("TIME: %ld\n", philo->info->time);
-        printf("PHILO\n");
-		printf("PHILO NB = %d\n", philo->nb);
-		printf("lf = %d\n", philo->lf);
-        printf("PHILO NB = %ld\n", philo->last_eat);
-		philo = philo->next;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_info	info;
@@ -100,12 +88,12 @@ int	main(int argc, char **argv)
 	if (ft_check(argc, argv, &info))
 		return (1);
 	ft_create_list(&philo, &info);
-//	ft_print_philos(philo);
+//	ft_print_philo(philo);
 	ft_create_threads(&info, &philo);
 	i = -1;
 	while (++i < info.nb)
 		pthread_mutex_destroy(&info.fork[i]);
-    pthread_mutex_unlock(&info.status);
+//    pthread_mutex_unlock(&info.status);
 	pthread_mutex_destroy(&info.status);
 	free(info.fork);
 	//system("leaks philosophers");

@@ -67,9 +67,10 @@ int		ft_check(int argc, char **argv, t_info *info);
 
 	//PRINT
 int		ft_print_status(t_philo *philo, char *s);
+void    ft_print_philo(t_philo *philo);
 
 	//TIME
-long		ft_time(void);
+long	ft_time(void);
 void	ft_usleep(unsigned int ms);
 
 	//ACTIONS
