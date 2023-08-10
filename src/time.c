@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:41:32 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/20 16:25:34 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:45:11 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,4 @@ void	ft_usleep(unsigned int ms)
 	start_time = ft_time();
 	while (ft_time() - start_time < ms)
 		usleep(100);
-} 
+}

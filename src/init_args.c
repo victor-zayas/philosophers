@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 12:02:40 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/21 16:55:30 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:47:03 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	int	ft_init(t_info *info)
 	info->died = 0;
 	info->eaten = 0;
 	info->time = 0;
-    info->running = 1;
+	info->running = 1;
 	return (0);
 }
 

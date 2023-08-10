@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:27:09 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/21 12:51:15 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:46:51 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ typedef struct info
 	long			ttd;
 	long			tte;
 	long			tts;
-	long 			time;
+	long			time;
 	int				must_eat;
 	int				eaten;
 	int				died;
-    unsigned short  running;
+	unsigned short	running;
 	pthread_mutex_t	status;
 	pthread_mutex_t	*fork;
 }	t_info;
@@ -43,12 +43,11 @@ typedef struct philo
 	pthread_t		th;
 	int				nb;
 	int				lf;
-    int             ate;
-	long 			last_eat;
+	int				ate;
+	long			last_eat;
 	t_info			*info;
 	struct philo	*next;
 }	t_philo;
-
 
 // PROTOTYPE
 
@@ -59,7 +58,7 @@ void	free_mem(t_philo *head, t_info *info);
 
 	//CREATE_LIST
 int		ft_atoi(const char *str);
-t_philo *ft_lstnew(int id, t_info *info);
+t_philo	*ft_lstnew(int id, t_info *info);
 void	ft_lstadd_back(t_philo **lst, t_philo *new);
 void	ft_create_list(t_philo **philo, t_info *info);
 
@@ -68,7 +67,7 @@ int		ft_check(int argc, char **argv, t_info *info);
 
 	//PRINT
 int		ft_print_status(t_philo *philo, char *s);
-void    ft_print_philo(t_philo *philo);
+void	ft_print_philo(t_philo *philo);
 
 	//TIME
 long	ft_time(void);
@@ -77,7 +76,7 @@ void	ft_usleep(unsigned int ms);
 	//ACTIONS
 void	ft_dead(t_philo *philo);
 void	ft_eating(t_philo *philo);
-void    ft_must_eat(t_philo *philo);
+void	ft_must_eat(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 void	ft_thinking(t_philo *philo);
 

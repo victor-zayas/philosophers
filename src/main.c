@@ -6,43 +6,45 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:56:54 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/29 12:08:29 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/10 19:44:50 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void *ft_check_dead(void *args)
+void	*ft_check_dead(void *args)
 {
-    t_philo *philo = args;
+	t_philo	*philo;
 
-    while (philo->info->running != 0)
-    {
-        ft_dead(philo);
-        usleep(100);
-    }
-    return (NULL);
+	philo = args;
+	while (philo->info->running != 0)
+	{
+		ft_dead(philo);
+		usleep(100);
+	}
+	return (NULL);
 }
 
-void *ft_routine(void *args)
+void	*ft_routine(void *args)
 {
-    t_philo *philo = args;
-    pthread_t check_thread;
+	pthread_t	check_thread;
+	t_philo		*philo;
 
-    philo->ate = 0;
-    philo->last_eat = 0;
-    if (philo->nb % 2 == 0)
-        ft_usleep(philo->info->tte - 20);
-    pthread_create(&check_thread, NULL, ft_check_dead, philo);
-    while (philo->info->running != 0)
-    {
-        if (philo->info->eaten < philo->info->nb)
-            ft_eating(philo);
-        ft_sleep(philo);
-        ft_thinking(philo);
-    }
-    pthread_detach(check_thread);
-    return (NULL);
+	philo = args;
+	philo->ate = 0;
+	philo->last_eat = 0;
+	if (philo->nb % 2 == 0)
+		ft_usleep(philo->info->tte - 20);
+	pthread_create(&check_thread, NULL, ft_check_dead, philo);
+	while (philo->info->running != 0)
+	{
+		if (philo->info->eaten < philo->info->nb)
+			ft_eating(philo);
+		ft_sleep(philo);
+		ft_thinking(philo);
+	}
+	pthread_detach(check_thread);
+	return (NULL);
 }
 
 void	ft_create_threads(t_info *info, t_philo **philo)
@@ -86,6 +88,6 @@ int	main(int argc, char **argv)
 		pthread_mutex_destroy(&info.fork[i]);
 	pthread_mutex_destroy(&info.status);
 	free(info.fork);
-    free_mem(&*philo, &info);
+	free_mem(&*philo, &info);
 	return (0);
 }
