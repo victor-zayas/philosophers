@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:39:36 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/08/10 19:45:28 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:43:57 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,15 @@ t_philo	*ft_lstlast(t_philo *lst)
 	return (lst);
 }
 
-void	free_mem(t_philo *head, t_info *info)
+void	free_mem(t_philo *philo, t_info *info)
 {
 	t_philo	*aux;
 
 	while (info->nb)
 	{
-		aux = head;
-		head = head->next;
+		aux = philo;
+		philo = philo->next;
 		free(aux);
 		info->nb--;
 	}
-	free(info);
 }

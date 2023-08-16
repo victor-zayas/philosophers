@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:56:54 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/08/10 19:44:50 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:44:20 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	ft_create_threads(t_info *info, t_philo **philo)
 			return ;
 		*philo = (*philo)->next;
 	}
-	free (tmp);
 }
 
 int	main(int argc, char **argv)
@@ -87,7 +86,7 @@ int	main(int argc, char **argv)
 	while (++i < info.nb)
 		pthread_mutex_destroy(&info.fork[i]);
 	pthread_mutex_destroy(&info.status);
-	free(info.fork);
-	free_mem(&*philo, &info);
+	free_mem(philo, &info);
+	// system("leaks philosophers");
 	return (0);
 }

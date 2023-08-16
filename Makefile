@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2023/06/21 15:00:37 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/08/16 12:46:15 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,13 @@ OBJDIR := objs/
 SRCDIR := src/
 
 # SRC #
-SRCS =	main.c	\
-		lib.c	\
-		lib_utils.c	\
-		print.c	\
-		time.c	\
-		init_args.c	\
-		actions.c	\
+SRCS =	main.c			\
+		actions.c		\
+		create_list.c	\
+		init_args.c		\
+		print.c			\
+		time.c			\
+		utils.c			\
 		
 SRC := $(addprefix $(SRCDIR), $(SRCS))
 OBJS := $(addprefix $(OBJDIR), $(OBJS))
