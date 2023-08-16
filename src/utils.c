@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:39:36 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/08/16 12:43:57 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/16 12:58:39 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void	free_mem(t_philo *philo, t_info *info)
 		free(aux);
 		info->nb--;
 	}
+	free(info->fork);
 }
