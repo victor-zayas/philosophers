@@ -6,7 +6,7 @@
 #    By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/29 19:16:20 by vzayas-s          #+#    #+#              #
-#    Updated: 2023/08/16 12:46:15 by vzayas-s         ###   ########.fr        #
+#    Updated: 2023/08/30 19:34:24 by vzayas-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,8 +79,11 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $(NAME)
+# open a photo
 	open The_file/philosophers.jpeg
+# message for compilation finished
 	echo "$(BLUE)༺ Program compiled༻$(END)"
+# show ascii art with env variable
 	echo "$$PHILO"
 
 clean:

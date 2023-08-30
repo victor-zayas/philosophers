@@ -6,12 +6,17 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 21:28:24 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/08/10 19:43:28 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:33:21 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/**
+ * @brief check if 1 philosopher is dead if can't eat in time given
+ * 
+ * @param philo struct with philosophers info
+ */
 void	ft_dead(t_philo *philo)
 {
 	if (((ft_time() - philo->info->time) - philo->last_eat) >= philo->info->ttd)
@@ -30,6 +35,12 @@ void	ft_dead(t_philo *philo)
 	}
 }
 
+/**
+ * @brief action of eating for philosophers.
+ 		  Lock mutex (forks) so that each filosofo picks up only 2 forks at a time
+ * 
+ * @param philo struct with philosophers info
+ */
 void	ft_eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->info->fork[philo->lf]);
@@ -44,6 +55,11 @@ void	ft_eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->info->fork[philo->next->lf]);
 }
 
+/**
+ * @brief checks whether a philosopher has eaten the required number of times, given from parameters
+ * 
+ * @param philo struct with philosophers info
+ */
 void	ft_must_eat(t_philo *philo)
 {
 	if (philo->info->must_eat)
@@ -62,12 +78,22 @@ void	ft_must_eat(t_philo *philo)
 	}
 }
 
+/**
+ * @brief do sleep function given in miliseconds form parameter
+ * 
+ * @param philo struct with philosophers info
+ */
 void	ft_sleep(t_philo *philo)
 {
 	ft_print_status(philo, "is sleeping...\n");
 	ft_usleep(philo->info->tts);
 }
 
+/**
+ * @brief print thinking action
+ * 
+ * @param philo struct with philosophers info
+ */
 void	ft_thinking(t_philo *philo)
 {
 	ft_print_status(philo, "is thinking...\n");

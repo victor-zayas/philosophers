@@ -6,7 +6,7 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:27:09 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/08/16 12:42:47 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:35:13 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 
 // STRUCT
 
+/**
+ * @brief struct with parameters info
+ * 
+ */
 typedef struct info
 {
 	int				nb;
@@ -38,6 +42,10 @@ typedef struct info
 	pthread_mutex_t	*fork;
 }	t_info;
 
+/**
+ * @brief struct with philosophers data
+ * 
+ */
 typedef struct philo
 {
 	pthread_t		th;

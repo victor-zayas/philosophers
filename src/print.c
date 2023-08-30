@@ -6,12 +6,19 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:42:32 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/08/10 19:45:05 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:15:58 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/**
+ * @brief print messages with actual time, ID of philosopher and custom message
+ * 
+ * @param philo struct point with philosopher info
+ * @param s custom message
+ * @return int
+ */
 int	ft_print_status(t_philo *philo, char *s)
 {
 	if (philo->info->running != 0)

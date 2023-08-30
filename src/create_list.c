@@ -1,17 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib.c                                              :+:      :+:    :+:   */
+/*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:17:29 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/06/20 15:51:44 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:26:24 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/**
+ * @brief recreate atoi function in C
+ * 
+ * @param str string received
+ * @return int number received
+ */
 int	ft_atoi(const char *str)
 {
 	int	result;
@@ -38,6 +44,13 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
+/**
+ * @brief create a new node
+ * 
+ * @param id number of node
+ * @param info struct wit basic info
+ * @return t_philo* philosophers node
+ */
 t_philo	*ft_lstnew(int id, t_info *info)
 {
 	t_philo	*node;
@@ -52,6 +65,12 @@ t_philo	*ft_lstnew(int id, t_info *info)
 	return (node);
 }
 
+/**
+ * @brief add node to last element of list
+ * 
+ * @param lst head of list
+ * @param new node to add
+ */
 void	ft_lstadd_back(t_philo **lst, t_philo *new)
 {
 	t_philo	*final;
@@ -65,6 +84,12 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new)
 	}
 }
 
+/**
+ * @brief create a new list
+ * 
+ * @param philo struct with philosophers info
+ * @param info struct with basic info
+ */
 void	ft_create_list(t_philo **philo, t_info *info)
 {
 	int		i;

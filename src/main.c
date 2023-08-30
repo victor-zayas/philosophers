@@ -6,12 +6,18 @@
 /*   By: vzayas-s <vzayas-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:56:54 by vzayas-s          #+#    #+#             */
-/*   Updated: 2023/08/16 12:59:20 by vzayas-s         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:19:36 by vzayas-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+/**
+ * @brief paralel thread to check if some philosopher is dead
+ * 
+ * @param args struct pointer to philo structure
+ * @return void* 
+ */
 void	*ft_check_dead(void *args)
 {
 	t_philo	*philo;
@@ -25,6 +31,12 @@ void	*ft_check_dead(void *args)
 	return (NULL);
 }
 
+/**
+ * @brief define a routine for all threads
+ * 
+ * @param args struct pointer to philo structure
+ * @return void* 
+ */
 void	*ft_routine(void *args)
 {
 	pthread_t	check_thread;
@@ -47,6 +59,12 @@ void	*ft_routine(void *args)
 	return (NULL);
 }
 
+/**
+ * @brief create threads until end of list
+ * 
+ * @param info struct with basic info
+ * @param philo struct with philosophers info
+ */
 void	ft_create_threads(t_info *info, t_philo **philo)
 {
 	t_philo	*tmp;
